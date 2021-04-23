@@ -4,8 +4,5 @@
 
 
 def newgraph():
-
-
-
-def oldgraph():
+    
 
