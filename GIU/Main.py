@@ -1,31 +1,29 @@
 from tkinter import *
-
-
+from tkinter import filedialog
 'Primera Ventana'
-root= Tk()
+def mainwindow():
 
-root.title("Estudio de Tiempos")
-root.resizable(0,0)
-root.geometry("400x300")
-root.config(bg="white")
+    root= Tk()
 
-titulo= Label(root,text="Estudio de Tiempos",foreground="white", background="black",width=44,height=1, font=("Times", 12) )
-titulo.place(x=0,y=60)
+    root.title("Estudio de Tiempos")
+    root.resizable(0,0)
+    root.geometry("400x300")
+    root.config(bg="white")
 
-titulo2= Label(root,text="Estudio de Tiempos",foreground="yellow", background="gray",width=0,height=0, font=("Times", 12) )
-titulo2.pack()
+    titulo= Label(root,text="Estudio de Tiempos",foreground="black", background="white", font=("Times", 18) )
+    titulo.pack(side=TOP, pady=20)
 
+    BNuevo=Button(root,text="Nuevo Grafo",command=buscargrafo, font=("Times", 14))
+    BNuevo.pack(pady=35)
 
-def imprimir():
-    print("Se presionó el botón")
+    bold=Button(root,text="Usar grafo anterior",command=buscargrafo, font=("Times", 14))
+    bold.pack()
 
-BNuevo=Button(root,text="Nuevo Grafo",command=imprimir, width=12)
-BNuevo.place(y=105)
+    root.mainloop()
 
+def buscargrafo():
+    archivo= filedialog.askopenfilename(initialdir='/', title='Seleccione el archivo')
 
-bold=Button(root,text="Usar grafo anterior",command=imprimir)
-bold.place(y=250)
+    'Segunda Ventana'
 
-
-root.mainloop()
-
+mainwindow()
