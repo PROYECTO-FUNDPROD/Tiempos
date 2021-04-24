@@ -15,7 +15,7 @@ def segundaVentana():
     root.config(bg="white")
 
     titulo= Label(root,text="Estudio de Tiempos",foreground="black", background="white", font=("Times", 12, "italic") )
-    titulo.place(x=1000,y=3)
+    titulo.place(x=960,y=3)
 
     titulo2= Label(root,text="Dibujar Grafo",foreground="black", background="white", font=("Times", 18) )
     titulo2.pack(side=TOP, pady=10)
@@ -48,48 +48,48 @@ def ingresar_proceso():
 
     root.title("Estudio de Tiempos: Ingresar Proceso")
     root.resizable(0,0)
-    root.geometry("600x300")
+    root.geometry("500x300")
     root.config(bg="white")
 
     titulo= Label(root,text="Estudio de Tiempos",foreground="black", background="white", font=("Times", 12, "italic") )
-    titulo.place(x=10,y=3)
+    titulo.place(x=360,y=3)
 
-    titulo2= Label(root,text="Ingresar Información del Proceso",foreground="black", background="white", font=("Times", 12, "italic") )
-    titulo2.place(x=10,y=3)
+    titulo2= Label(root,text="Ingresar Información del Proceso",foreground="black", background="white", font=("Times", 12) )
+    titulo2.place(x=40,y=30)
 
 
     nlabel=Label(root,text="Nombre:",foreground="black", background="white", font=("Times", 11))
-    nlabel.pack()
+    nlabel.place(x=40,y=70)
 
-    nombre=Entry(root)
-    nombre.pack()
+    nombre=Entry(root,width= 15)
+    nombre.place(x=140,y=70)
 
-    prelabel=Label(root,text="Predecesor:",foreground="black", background="white", font=("Times", 11))
-    prelabel.pack()
+    prelabel=Label(root,text="Predecesor:",foreground="black", background="white", font=("Times", 11),)
+    prelabel.place(x=40,y=120)
 
-    predecesor= ttk.Combobox(root,values=listanodos)
-    predecesor.pack()
+    predecesor= ttk.Combobox(root,values=listanodos,width= 15)
+    predecesor.place(x=140,y=120)
 
     dlabel=Label(root,text="Descripción:",foreground="black", background="white", font=("Times", 11))
-    dlabel.pack()
+    dlabel.place(x=40,y=170)
 
-    descripcion= ttk.Combobox(root, text="Descripción",values=["Manual", "Automático"])
-    descripcion.pack()
+    descripcion= ttk.Combobox(root, text="Descripción",values=["Manual", "Automático"],width= 15)
+    descripcion.place(x=140,y=170)
 
     freclabel=Label(root,text="Frecuencia:  Cada",foreground="black", background="white", font=("Times", 11))
-    freclabel.pack()
+    freclabel.place(x=40,y=220)
 
-    spin = Spinbox(root, from_= 0, to = 100)  
-    spin.pack()
+    spin = Spinbox(root, from_= 0, to = 100, width=3)  
+    spin.place(x=160,y=220)
 
     unlabel=Label(root,text="unidades",foreground="black", background="white", font=("Times", 11))
-    unlabel.pack()
+    unlabel.place(x=200,y=220)
 
     Bacep=Button(root,text="Aceptar",command=imprimir, font=("Times", 13), height=1)
-    Bacep.place(x=879,y=420)
+    Bacep.place(x=260,y=260)
 
     Bcan=Button(root,text="Cancelar",command=imprimir, font=("Times", 13), height=1)
-    Bcan.place(x=879,y=420)
+    Bcan.place(x=360,y=260)
 
 
 
