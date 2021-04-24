@@ -34,7 +34,7 @@ def newgraph(r):
     r.destroy()
     N.segundaVentana()
 def noAccion():
-    null
+    print("Funciona")
 
 
     
