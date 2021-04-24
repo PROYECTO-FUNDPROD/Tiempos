@@ -48,48 +48,51 @@ def ingresar_proceso():
 
     root.title("Estudio de Tiempos: Ingresar Proceso")
     root.resizable(0,0)
-    root.geometry("500x300")
+    root.geometry("380x350")
     root.config(bg="white")
 
     titulo= Label(root,text="Estudio de Tiempos",foreground="black", background="white", font=("Times", 12, "italic") )
-    titulo.place(x=360,y=3)
+    titulo.place(x=245,y=3)
 
-    titulo2= Label(root,text="Ingresar Información del Proceso",foreground="black", background="white", font=("Times", 12) )
-    titulo2.place(x=40,y=30)
+    titulo2= Label(root,text="Ingresar Información del Proceso",foreground="black", background="white", font=("Times", 12, 'bold') )
+    titulo2.place(x=70,y=45)
 
 
     nlabel=Label(root,text="Nombre:",foreground="black", background="white", font=("Times", 11))
-    nlabel.place(x=40,y=70)
+    nlabel.place(x=70,y=100)
 
-    nombre=Entry(root,width= 15)
-    nombre.place(x=140,y=70)
+    nombre=Entry(root,width= 21)
+    nombre.place(x=170,y=100)
 
     prelabel=Label(root,text="Predecesor:",foreground="black", background="white", font=("Times", 11),)
-    prelabel.place(x=40,y=120)
+    prelabel.place(x=70,y=150)
 
-    predecesor= ttk.Combobox(root,values=listanodos,width= 15)
-    predecesor.place(x=140,y=120)
+    predecesor= ttk.Combobox(root,values=listanodos,width= 18)
+    predecesor.place(x=170,y=150)
 
     dlabel=Label(root,text="Descripción:",foreground="black", background="white", font=("Times", 11))
-    dlabel.place(x=40,y=170)
+    dlabel.place(x=70,y=200)
 
-    descripcion= ttk.Combobox(root, text="Descripción",values=["Manual", "Automático"],width= 15)
-    descripcion.place(x=140,y=170)
+    descripcion= ttk.Combobox(root, text="Descripción",values=["Manual", "Automático"],width= 18)
+    descripcion.place(x=170,y=200)
 
-    freclabel=Label(root,text="Frecuencia:  Cada",foreground="black", background="white", font=("Times", 11))
-    freclabel.place(x=40,y=220)
+    freclabel=Label(root,text="Frecuencia:",foreground="black", background="white", font=("Times", 11))
+    freclabel.place(x=70,y=250)
+
+    calabel=Label(root,text="Cada",foreground="black", background="white", font=("Times", 11))
+    calabel.place(x=170,y=250)
 
     spin = Spinbox(root, from_= 0, to = 100, width=3)  
-    spin.place(x=160,y=220)
+    spin.place(x=211,y=250)
 
     unlabel=Label(root,text="unidades",foreground="black", background="white", font=("Times", 11))
-    unlabel.place(x=200,y=220)
+    unlabel.place(x=248,y=250)
 
     Bacep=Button(root,text="Aceptar",command=imprimir, font=("Times", 13), height=1)
-    Bacep.place(x=260,y=260)
+    Bacep.place(x=222,y=300)
 
     Bcan=Button(root,text="Cancelar",command=imprimir, font=("Times", 13), height=1)
-    Bcan.place(x=360,y=260)
+    Bcan.place(x=290,y=300)
 
 
 
