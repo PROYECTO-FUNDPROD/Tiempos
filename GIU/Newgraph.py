@@ -57,7 +57,6 @@ def ingresar_proceso():
     titulo2= Label(root,text="Ingresar Información del Proceso",foreground="black", background="white", font=("Times", 12, 'bold') )
     titulo2.place(x=70,y=45)
 
-
     nlabel=Label(root,text="Nombre:",foreground="black", background="white", font=("Times", 11))
     nlabel.place(x=70,y=100)
 
@@ -93,6 +92,7 @@ def ingresar_proceso():
 
     Bcan=Button(root,text="Cancelar",command=imprimir, font=("Times", 13), height=1)
     Bcan.place(x=290,y=300)
+
 
 
 
