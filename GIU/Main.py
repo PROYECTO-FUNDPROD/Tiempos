@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 import Newgraph as N
+import Msgbox as msgs
 from tkinter import messagebox as mb
 from functools import partial
 'Primera Ventana'
@@ -25,13 +26,17 @@ def mainwindow():
     root.mainloop()
 
 def buscargrafo():
+    msgs.doMessageBox("Titulo Prueba","Mensaje Prueba","info",noAccion,noAccion)
     archivo= filedialog.askopenfilename(initialdir='/', title='Seleccione el archivo')
 
     'Segunda Ventana'
 def newgraph(r):
     r.destroy()
     N.segundaVentana()
-    
+def noAccion():
+    null
+
+
     
 
     
