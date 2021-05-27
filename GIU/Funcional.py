@@ -44,25 +44,19 @@ def ventana(tituloVentana, mensajeVentana,tipo):
     
     #scrollb.grid_forget()    
     frameTwo.pack(side="bottom",pady=30)
-    num_piezas = 5
-    optionmenus_piezas = list()
-    numpiezas = []
-    numerolotes = []
-    optionmenus_prioridad = list()
-    lotes = list()
-    mispiezas = ['One', 'Two', 'Three', 'Four', 'Five']
+    num_piezas = len(listanodos)
+    
     n = 1
     textotamano = Label(listFrame, text = "", justify="left",bg="white")
     textotamano.pack(ipadx=322)
-    while n <= num_piezas:
-        
+    while n <= num_piezas:        
         textopieza = Label(listFrame, text = "Pieza: "+str(n), justify="left",bg="white")
         textopieza.pack(side="top",padx=20)
         var = StringVar()
         if(tipo=="personas"):
             llenar=Spinbox(listFrame, from_= 0, to = 150)  
         else:
-            llenar = OptionMenu(listFrame, var, *mispiezas)
+            llenar = OptionMenu(listFrame, var, *listanodos)
         
         llenar.config(width=10,bg="white")
         llenar.pack(side="top",padx=5)
