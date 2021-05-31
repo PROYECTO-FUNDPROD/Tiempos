@@ -2,8 +2,29 @@ from tkinter import *
 from tkinter import messagebox as mb
 from tkinter import ttk
 from functools import partial
+import Msgbox as mBox
+
 def imprimir():
     print("botton")
+
+def Aceptar(A,B,cspin,D,espin,F,G,H,I,J):
+    trabajo_pie= A.get()
+    postura= B.get()
+    peso_levantado= cspin.get()
+    iluminacion= D.get()
+    humedad=espin.get()
+    concentracion= F.get()
+    ruido=G.get()
+    tension=H.get()
+    monotonia= I.get()
+    tedio= J.get()
+    if (trabajo_pie =="") or (postura == "") or (peso_levantado=="") or (iluminacion =="") or (humedad=="") or (concentracion=="") or (ruido=="") or (tension=="") or (monotonia=="") or (tedio==""):
+        titulo="Información Incompleta"
+        mensaje= "Por favor complete todas las casillas de información para continuar"
+        icono="error"
+        mBox.okMessageBox(titulo,mensaje,icono)
+    
+
     
 def condiciones_laborales():
     root= Tk()
@@ -29,6 +50,7 @@ def condiciones_laborales():
 
     A= ttk.Combobox(root,values=['Sí','No'],width= 18)
     A.place(x=215,y=115)
+    
 
     Blabel=Label(root,text="Postura:",foreground="black", background="white", font=("Times", 11))
     Blabel.place(x=35,y=150)
@@ -36,22 +58,25 @@ def condiciones_laborales():
     B= ttk.Combobox(root,values=['Cómoda', 'Ligeramente incómoda','Incómoda','Muy incómoda'],width= 18)
     B.place(x=215,y=150)
     
+    
     Clabel=Label(root,text="Uso de fuerza",foreground="black", background="white", font=("Times", 11))
     Clabel.place(x=35,y=185)
 
     T1 = Text(root, height = 2, width = 70, font=("Times", 10,'italic'), relief='flat')
-    mensaje1="? Peso (Kg) levantado, tirado\no empujado por kilogramo "
+    mensaje1="Peso (Kg) levantado, tirado\no empujado por kilogramo "
     T1.insert(END, mensaje1)
     T1.place(x=375, y=178)
 
     cspin = Spinbox(root, from_= 0, to = 50, width=19)  
     cspin.place(x=215,y=185)
     
+    
     Dlabel=Label(root,text="Iluminación:",foreground="black", background="white", font=("Times", 11),)
     Dlabel.place(x=35,y=220)
 
     D= ttk.Combobox(root,values=['Suficiente', 'Ligeramente baja','Bastante baja','Absol. insuficiente'],width= 18)
     D.place(x=215,y=220)
+    
 
     Elabel=Label(root,text="Condiciones Atmosféricas:",foreground="black", background="white", font=("Times", 11))
     Elabel.place(x=35,y=255)
@@ -69,7 +94,7 @@ def condiciones_laborales():
 
     F= ttk.Combobox(root,values=['Cierta precisión','Precisión', 'Fatigoso','Gran precisión', 'Muy fatigoso'],width= 18)
     F.place(x=215,y=290)
-
+    
     Glabel=Label(root,text="Ruido: ",foreground="black", background="white", font=("Times", 11))
     Glabel.place(x=35,y=325)
 
@@ -93,11 +118,17 @@ def condiciones_laborales():
 
     J=ttk.Combobox(root,values=['No aburrido','Aburrido','Bastante aburrido','Muy aburrido'],width= 18)
     J.place(x=215,y=430)
+    
 
-    Bacep=Button(root,text="Aceptar",command=imprimir, font=("Times", 13), height=1)
+    Bacep=Button(root,text="Aceptar",command= lambda: Aceptar(A,B,cspin,D,espin,F,G,H,I,J), font=("Times", 13), height=1, )
     Bacep.place(x=440,y=470)
 
     root.mainloop()
+
 condiciones_laborales()
+
+
+
+
 
     
