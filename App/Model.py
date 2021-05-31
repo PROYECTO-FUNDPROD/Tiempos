@@ -177,23 +177,6 @@ class hombre:
 
 
 
-        
-        
-
-            
-            
-            
-            
-
-    
-            
-
-
-
-
-class Hombre:
-    def __ini
-
 
 
 
