@@ -116,7 +116,7 @@ def condiciones_laborales():
     Jlabel=Label(root,text="Tedio:",foreground="black", background="white", font=("Times", 11),)
     Jlabel.place(x=35,y=430)
 
-    J=ttk.Combobox(root,values=['No aburrido','Aburrido','Bastante aburrido','Muy aburrido'],width= 18)
+    J=ttk.Combobox(root,values=['No aburrido','Algo aburrido','Bastante aburrido','Muy aburrido'],width= 18)
     J.place(x=215,y=430)
     
 
