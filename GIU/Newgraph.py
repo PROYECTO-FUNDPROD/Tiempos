@@ -10,6 +10,8 @@ import App.View as vw
 
 def imprimir():
     print("botton")
+    for i in range (0, len(lista)):
+        print(lista[i].get())
 
 def nuevoProceso(nombre,descripcion, frecuencia):
     if nombre=="" or descripcion=='' or frecuencia=='':
@@ -20,7 +22,7 @@ def nuevoProceso(nombre,descripcion, frecuencia):
     else:
         tarea= vw.nueva_tarea(nombre,descripcion,frecuencia)
         tareas= vw.getTareasNombres()
-        
+        print(tareas)
         if len(tareas)>1:
             ingresar_proceso2("Añadir Predecesores", "A continuación debe ingresar los predecesores del Proceso {0}".format(nombre),"Cantidad de predecesores: ",tareas)
             
@@ -141,41 +143,46 @@ def ingresar_proceso2(tituloVentana, mensajeVentana, tipo, listanodos):
     predecesor.place(x=140,y=85)
     
     
+contador=0
+def llenarScroll(predecesorCmb,listanodos, root, a):
+    predecesor=predecesorCmb.get()
+    global lista
+    lista=[]
+    if predecesor!="":
+        frameTwo = Frame(root,bg="white")
+        frameTwo.tkraise()
+        canvas=Canvas(frameTwo,bg="white",width=350,height=200)
+        canvas.pack(side="left")
 
-def llenarScroll(predecesor,listanodos, root, a):
-    
-    
-    frameTwo = Frame(root,bg="white")
-    canvas=Canvas(frameTwo,bg="white",width=350,height=200)
-    canvas.pack(side="left")
+        scrollb=ttk.Scrollbar( frameTwo, orient="vertical",command=canvas.yview)
+        scrollb.pack(side="right",fill="y")
+        canvas.configure(yscrollcommand=scrollb.set) 
+        canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion = canvas.bbox("all")))
 
-    scrollb=ttk.Scrollbar( frameTwo, orient="vertical",command=canvas.yview)
-    scrollb.pack(side="right",fill="y")
-    canvas.configure(yscrollcommand=scrollb.set) 
-    canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion = canvas.bbox("all")))
-
-
-    listFrame=Frame(canvas,background="white")
-    canvas.create_window((0,0),window=listFrame, anchor="center")
+        listFrame=Frame(canvas,background="white")
+        canvas.create_window((0,0),window=listFrame, anchor="center")
     
     #scrollb.grid_forget()    
-    frameTwo.pack(side="top",pady=85)
-    n = 1
-    num_piezas=0
-    print("aquio"+ str(predecesor.get()) +"...")
-    if predecesor.get()!= '':
-        num_piezas = int(predecesor.get())
-    if predecesor.get()=='0':
-        for widgets in frameTwo.winfo_children():
-            widgets.destroy()
-    while n <= num_piezas:        
-        textopieza = Label(listFrame, text = "Predecesor "+str(n), justify="left",bg="white")
-        textopieza.pack(side="top")
-        var = StringVar()
-        llenar =ttk.Combobox(listFrame, values=listanodos, width=15)
-        llenar.config(width=10)
-        llenar.pack(side= "top")
-        n += 1
+        frameTwo.pack(side="top",pady=85)
+        n = 1
+        num_piezas=0
+        print("aquio"+ predecesor +"...")
+        num_piezas = int(predecesor)
+        while n <= num_piezas:        
+            textopieza = Label(listFrame, text = "Predecesor "+str(n), justify="left",bg="white")
+            textopieza.pack(side="top")
+            var = StringVar()
+            llenar =ttk.Combobox(listFrame, values=listanodos, width=15)
+            lista.append(llenar)
+            llenar.config(width=10)
+            llenar.pack(side= "top")
+            n += 1
+        
+        
+        
+def deletef(frame):
+    frame.pack_forget()
+    frame.destroy()
 
 
 def varios(tituloVentana, mensajeVentana, tipo, listanodos):

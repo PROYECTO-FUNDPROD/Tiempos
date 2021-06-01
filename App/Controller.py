@@ -6,12 +6,12 @@ Created on Thu Apr 22 15:04:13 2021
 """
 import config
 from App.Model import proceso
+#from Model import proceso as p
 
 list_procesos=[]
 
 def nueva_tarea(nombre, descripcion, frecuencia):
     objeto = proceso(nombre, descripcion, frecuencia)
-    print(nombre)
     list_procesos.append(objeto)
     return objeto
 

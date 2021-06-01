@@ -8,10 +8,10 @@ Created on Thu Apr 22 15:03:58 2021
 
 class proceso:
     def __init__(self,nombre,descripcion,frecuencia) -> None:
-        proceso.nombre= nombre
-        proceso.predecesores=[]
-        proceso.frecuencia= frecuencia
-        proceso.descripcion= descripcion
+        self.nombre= nombre
+        self.predecesores=[]
+        self.frecuencia= frecuencia
+        self.descripcion= descripcion
 
     def add_predecesor(self, proceso):
         self.predecesores.append(proceso)
