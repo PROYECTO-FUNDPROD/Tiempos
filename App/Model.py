@@ -6,7 +6,20 @@ Created on Thu Apr 22 15:03:58 2021
 """
 from typing_extensions import Concatenate
 
+class proceso:
+    def __init__(self,nombre,descripcion,frecuencia) -> None:
+        proceso.nombre= nombre
+        proceso.predecesores=[]
+        proceso.frecuencia= frecuencia
+        proceso.descripcion= descripcion
 
+    def add_predecesor(self, proceso):
+        self.predecesores.append(proceso)
+    
+    def delete_predecesor(self,proceso):
+        self.predecesores.remove(proceso)
+    
+    
 class mujer:
     def __init__(self, trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio):
         holgura= 7+4

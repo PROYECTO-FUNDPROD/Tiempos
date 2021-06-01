@@ -2,9 +2,14 @@ from tkinter import *
 from tkinter import messagebox as mb
 from tkinter import ttk
 from functools import partial
+import Funcional as func
 
 def imprimir():
     print("botton")
+def cancelar(r):
+    r.destroy
+def openWindow(tituloVentana, mensajeVentana,tipo):
+    func.ventana(tituloVentana, mensajeVentana,tipo)
 
 def segundaVentana():
     root= Tk()
@@ -26,14 +31,14 @@ def segundaVentana():
     Bnp=Button(root,text="Añadir Proceso",command=ingresar_proceso, font=("Times", 13),height=1)
     Bnp.place(x=155,y=420)
 
-    Bep=Button(root,text="Eliminar Proceso",command=imprimir, font=("Times", 13), height=1)
+    Bep=Button(root,text="Eliminar Proceso",command= lambda: openWindow("Eliminar Proceso", "A continuación deberá modificar los procesos que\nquedarán sin antecesor","Proceso: "), font=("Times", 13), height=1)
     Bep.place(x=275,y=420)
 
-    Bbt=Button(root,text="Modificar",command=imprimir, font=("Times", 13),height=1)
+    Bbt=Button(root,text="Modificar Proceso",command=lambda: openWindow("Modificar Proceso", "A continuación podrá modificar los predecesores del proceso deseado","Proceso: "), font=("Times", 13),height=1)
     Bbt.place(x=410,y=420)
 
     Bbt=Button(root,text="Borrar Todo",command=imprimir, font=("Times", 13),height=1)
-    Bbt.place(x=410,y=420)
+    Bbt.place(x=780,y=420)
 
     Bdib=Button(root,text="Dibujar",command=imprimir, font=("Times", 13), height=1)
     Bdib.place(x=879,y=420)
@@ -90,8 +95,9 @@ def ingresar_proceso():
     Bacep=Button(root,text="Aceptar",command=imprimir, font=("Times", 13), height=1)
     Bacep.place(x=222,y=300)
 
-    Bcan=Button(root,text="Cancelar",command=imprimir, font=("Times", 13), height=1)
+    Bcan=Button(root,text="Cancelar",command=lambda: cancelar(root), font=("Times", 13), height=1)
     Bcan.place(x=290,y=300)
+
 
 
 

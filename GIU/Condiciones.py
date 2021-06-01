@@ -118,7 +118,6 @@ def condiciones_laborales():
 
     J=ttk.Combobox(root,values=['No aburrido','Algo aburrido','Bastante aburrido','Muy aburrido'],width= 18)
     J.place(x=215,y=430)
-    
 
     Bacep=Button(root,text="Aceptar",command= lambda: Aceptar(A,B,cspin,D,espin,F,G,H,I,J), font=("Times", 13), height=1, )
     Bacep.place(x=440,y=470)
