@@ -4,7 +4,7 @@ Created on Thu Apr 22 15:03:58 2021
 
 @author: valen
 """
-from typing_extensions import Concatenate
+
 
 class proceso:
     def __init__(self,nombre,descripcion,frecuencia) -> None:
@@ -19,7 +19,7 @@ class proceso:
     def delete_predecesor(self,proceso):
         self.predecesores.remove(proceso)
     
-    
+
 class mujer:
     def __init__(self, trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio):
         holgura= 7+4
