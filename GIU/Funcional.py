@@ -11,12 +11,11 @@ def imprimir():
 def ventana(tituloVentana, mensajeVentana,tipo):
     listanodos=[1,2,3]
     root= Tk()
-
     root.title("Estudio de Tiempos")
     root.resizable(0,0)
     root.geometry("400x400")
     root.config(bg="white")
-    labelP=Label(root,text="Procesos",foreground="black", background="white", font=("Times", 11))
+    labelP=Label(root,text=tipo,foreground="black", background="white", font=("Times", 11))
     labelP.place(x=15,y=85)
     predecesor= ttk.Combobox(root,values=listanodos,width= 15)
     predecesor.place(x=140,y=85)
@@ -60,6 +59,7 @@ def ventana(tituloVentana, mensajeVentana,tipo):
 
         llenar.pack(side= "top", padx=100)
         n += 1
+
     
-    
-#ventana("Eliminar proceso", "A continuación debera modificar los procesos que\nquedarán sin antecesor","procesos")
+
+    ventana("Eliminar proceso", "A continuación debera modificar los procesos que\nquedarán sin antecesor","procesos")
