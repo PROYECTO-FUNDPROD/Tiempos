@@ -3,10 +3,10 @@
 Created on Thu Apr 22 15:04:13 2021
 
 @author: valen
-"""
+""""""
 import config
-from App.Model import proceso
-#from Model import proceso as p
+from App.Model import proceso"""
+from Model import proceso as proceso
 
 list_procesos=[]
 
@@ -23,3 +23,10 @@ def getTareasNombres():
 
 def addPredecesor(tarea,predecesor):
     tarea.add_predecesor(predecesor)
+def getObjectbyName(name):
+    objeto=None
+    for cada_objeto in list_procesos:
+        if cada_objeto.nombre== name:
+            objeto=cada_objeto
+    return objeto
+
