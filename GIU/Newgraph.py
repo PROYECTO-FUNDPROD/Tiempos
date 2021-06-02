@@ -19,6 +19,19 @@ def addPredecesores():
         pre=lista[i].get()
         vw.agregarPredecesor(tarea,pre)
 
+def ajustarPredecesores(r):
+    if len(dic_ajuste_predecesores)>0:
+        for proceso in dic_ajuste_predecesores:
+            vw.eliminarPredecesor(proceso, Aeliminar)
+            if dic_ajuste_predecesores[proceso]!="El predecesor ya fue elegido" and dic_ajuste_predecesores[proceso]!="Sin Sucesor":
+                tarea=vw.getObjectbyName(proceso)
+                vw.agregarPredecesor(tarea,dic_ajuste_predecesores[proceso])
+    vw.eliminarProceso(Aeliminar)
+    r.destroy()
+
+def imprimir1():
+    print("botton")
+
 def dibujar():
     img = Image.open(vw.dibujarGrafo())
     imgTk=ImageTk.PhotoImage(img)
@@ -41,6 +54,22 @@ def nuevoProceso(nombre,descripcion, frecuencia):
         if len(tareas)>1:
             ingresar_proceso2("Añadir Predecesores", "A continuación debe ingresar los predecesores del Proceso {0}".format(nombre),"Cantidad de predecesores: ",tareas)
             
+def mostrarTareasSinPrecedesores(predecesorCmb,root,a):
+    global Aeliminar
+    Aeliminar=predecesorCmb.get()
+    lista_sucesores= vw.getSucesores(Aeliminar)
+    opciones=vw.getTareasNombres()
+    opciones.remove(Aeliminar)
+    opciones.append("Sin predecesor")
+    opciones.append("El predecesor ya fue elegido")
+    if len(lista_sucesores)>= 1:
+        llenarScrollEliminar(predecesorCmb,lista_sucesores,opciones,root,a)
+    else:
+        mensajeVentana=" Para el proceso seleccionado no se encontraron sucesores.\n De click en Aceptar para eliminar correctamente el proceso. "
+        llenarLabel(mensajeVentana,root)
+        global dic_ajuste_predecesores
+        dic_ajuste_predecesores={}
+        
 
 def cancelar(r):
     r.destroy()
@@ -49,7 +78,7 @@ def cancelar(r):
 def openWindow(tituloVentana, mensajeVentana,tipo):
     #r.destroy()
     tareas= vw.getTareasNombres()
-    varios(tituloVentana, mensajeVentana,tipo, tareas)
+    Ventana_Eliminar_Proceso(tituloVentana, mensajeVentana,tipo, tareas)
 
 def segundaVentana():
     root= Tk()
@@ -114,7 +143,7 @@ def ingresar_proceso():
     dlabel=Label(root,text="Descripción:",foreground="black", background="white", font=("Times", 11))
     dlabel.place(x=70,y=150)
 
-    descripcion= ttk.Combobox(root, text="Descripción",values=["Manual", "Automático"],width= 18)
+    descripcion= ttk.Combobox(root, text="Descripción",values=["Manual", "Automático"],width= 18, state="readonly")
     descripcion.place(x=170,y=150)
 
     freclabel=Label(root,text="Frecuencia:",foreground="black", background="white", font=("Times", 11))
@@ -156,7 +185,7 @@ def ingresar_proceso2(tituloVentana, mensajeVentana, tipo, listanodos):
     Bacep.place(x=320,y=340)
 
     
-    predecesor= ttk.Combobox(root,values=lista,width= 15)
+    predecesor= ttk.Combobox(root,values=lista,width= 15,state="readonly")
     predecesor.bind("<<ComboboxSelected>>",partial(llenarScroll,predecesor,listanodos,root))
     predecesor.place(x=140,y=85)
 
@@ -191,7 +220,7 @@ def llenarScroll(predecesorCmb,listanodos, root, a):
             textopieza = Label(listFrame, text = "Predecesor "+str(n), justify="left",bg="white")
             textopieza.pack(side="top")
             var = StringVar()
-            llenar =ttk.Combobox(listFrame, values=listanodos, width=15)
+            llenar =ttk.Combobox(listFrame, values=listanodos, width=15,state="readonly")
             lista.append(llenar)
             llenar.config(width=10)
             llenar.pack(side= "top")
@@ -203,7 +232,7 @@ def deletef(frame):
     frame.destroy()
 
 
-def varios(tituloVentana, mensajeVentana, tipo, listanodos):
+def Ventana_Eliminar_Proceso(tituloVentana, mensajeVentana, tipo, listanodos):
     root= Tk()
     root.title("Estudio de Tiempos")
     root.resizable(0,0)
@@ -212,51 +241,62 @@ def varios(tituloVentana, mensajeVentana, tipo, listanodos):
 
     labelP=Label(root,text=tipo,foreground="black", background="white", font=("Times", 11))
     labelP.place(x=15,y=85)
-    predecesor= ttk.Combobox(root,values=listanodos,width= 15)
-    predecesor.place(x=140,y=85)
     titulo= Label(root,text="Estudio de Tiempos",foreground="black", background="white", font=("Times", 12, "italic") )
     titulo.place(x=265,y=3)
     tituloV= Label(root,text=tituloVentana,foreground="black", background="white", font=("Times", 15, "bold") )
     tituloV.pack(pady=30)
     mensajeV= Label(root,text=mensajeVentana,foreground="black", background="white", font=("Times", 12), justify="left" )
     mensajeV.place(x=15,y=120)
-    Bacep=Button(root,text="Aceptar",command= imprimir, font=("Times", 13), height=1, )
+    Bacep=Button(root,text="Aceptar",command= lambda:ajustarPredecesores(root), font=("Times", 13), height=1, )
+    Bacep.place(x=252,y=340)
+    Bacep=Button(root,text="Cancelar",command= lambda: cancelar(root), font=("Times", 13), height=1, )
     Bacep.place(x=320,y=340)
 
-    frameTwo = Frame(root,bg="white")
-    canvas=Canvas(frameTwo,bg="white",width=350,height=200)
-    canvas.pack(side="left")
+    predecesor= ttk.Combobox(root,values=listanodos,width= 15,state="readonly")
+    predecesor.bind("<<ComboboxSelected>>",partial(mostrarTareasSinPrecedesores,predecesor,root))
+    predecesor.place(x=140,y=85)
 
-    scrollb=ttk.Scrollbar( frameTwo, orient="vertical",command=canvas.yview)
-    scrollb.pack(side="right",fill="y")
-    canvas.configure(yscrollcommand=scrollb.set) 
-    canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion = canvas.bbox("all")))
-
-
-    listFrame=Frame(canvas,background="white")
-    canvas.create_window((0,0),window=listFrame, anchor="center")
-
+def llenarScrollEliminar(predecesorCmb,lista_sucesores, listanodos, root, a):
+    predecesor=predecesorCmb.get()
+    global dic_ajuste_predecesores
+    dic_ajuste_predecesores={}
     
-    #scrollb.grid_forget()    
-    frameTwo.pack(side="top",pady=85)
-    num_piezas = len(listanodos)
+    if predecesor!="":
+        
+        frameTwo = Frame(root,bg="white")
+        
+        canvas=Canvas(frameTwo,bg="white",width=350,height=200)
+        canvas.pack(side="left")
+
+        scrollb=ttk.Scrollbar( frameTwo, orient="vertical",command=canvas.yview)
+        scrollb.pack(side="right",fill="y")
+        canvas.configure(yscrollcommand=scrollb.set) 
+        canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion = canvas.bbox("all")))
+
+        listFrame=Frame(canvas,background="white")
+        canvas.create_window((0,0),window=listFrame, anchor="center")
     
-    n = 1
-    
-    while n <= num_piezas:        
-        textopieza = Label(listFrame, text = "Proceso: "+str(n), justify="left",bg="white")
-        textopieza.pack(side="top", padx=150)
-        var = StringVar()
-        if(tipo=="personas"):
-            llenar=Spinbox(listFrame, from_= 0, to = 150)  
-        else:
-            llenar =ttk.Combobox(listFrame, values=listanodos, width=15)
-        llenar.config(width=10)
-        llenar.pack(side= "top", padx=150)
-        n += 1
-
-
-
+    #scrollb.grid_forget()
+        frameTwo.tkraise()    
+        frameTwo.pack(side="top",pady=85)
+        n = 0
+        num_piezas=0
+        print("aquio"+ predecesor +"...")
+        num_piezas = len(lista_sucesores)
+        while n < num_piezas:        
+            textopieza = Label(listFrame, text = "Nuevo Predecesor Tarea "+str(lista_sucesores[n]), justify="left",bg="white")
+            textopieza.pack(side="top")
+            var = StringVar()
+            listan=listanodos.copy()
+            listan.remove(lista_sucesores[n])
+            llenar =ttk.Combobox(listFrame, values=listan, width=20, state="readonly")
+            dic_ajuste_predecesores[lista_sucesores[n]]=llenar
+            llenar.config(width=25)
+            llenar.pack(side= "top")
+            n += 1
+def llenarLabel(mensajeVentana,root):
+    mensajeV= Label(root,text=mensajeVentana,foreground="black", background="white", font=("Times", 12), justify="left",borderwidth="1", relief="solid", width=42, height=6 )
+    mensajeV.place(x=10, y=185)         
 #varios("Eliminar proceso", "A continuación debera modificar los procesos que\nquedarán sin antecesor","Procesos:")
 
 

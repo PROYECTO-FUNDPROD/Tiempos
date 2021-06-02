@@ -9,9 +9,11 @@ import config
 
 
 from App.Model import proceso
-#from Model import proceso as proceso
 import networkx as nx
-import graphviz
+#import graphviz
+
+#from Model import proceso as proceso
+
 
 
 
@@ -22,6 +24,9 @@ def nueva_tarea(nombre, descripcion, frecuencia):
     list_procesos.append(objeto)
     return objeto
 
+def eliminarProceso(object):
+    list_procesos.remove(object)
+
 def getTareasNombres():
     list_nombres=[]
     for cada_objeto in list_procesos:
@@ -30,12 +35,24 @@ def getTareasNombres():
 
 def addPredecesor(tarea,predecesor):
     tarea.add_predecesor(predecesor)
+
+def eliminarPredecesor(tarea, predecesor):
+    tarea.delete_predecesor(predecesor)
+
 def getObjectbyName(name):
     objeto=None
     for cada_objeto in list_procesos:
         if cada_objeto.nombre== name:
             objeto=cada_objeto
     return objeto
+
+def getSucesores(object):
+    lista_Sucesores=[]
+    for cada_objeto in list_procesos:
+        if object in cada_objeto.predecesores:
+            lista_Sucesores.append(cada_objeto.nombre)
+    return lista_Sucesores
+
 
 def dibujarGrafo():
     G = nx.DiGraph() # crear un grafo
