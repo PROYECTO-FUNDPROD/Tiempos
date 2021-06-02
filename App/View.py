@@ -28,6 +28,15 @@ def getObjectbyName(name):
     return object
 
 def dibujarGrafo():
-    cont.dibujarGrafo()
-
+    return cont.dibujarGrafo()
+"""
+print(nueva_tarea("Prueba test tarea","AUTO","2").nombre,nueva_tarea("B","AUTO","2").nombre,nueva_tarea("C","AUTO","2").nombre )
+agregarPredecesor(getObjectbyName("B"),"Prueba test tarea")
+agregarPredecesor(getObjectbyName("C"),"B")
+print(getTareasNombres())
+print(getObjectbyName("C").nombre)
+print(getObjectbyName("C").predecesores)
+#print(getSucesores("A"))
+dibujarGrafo()
+"""
 

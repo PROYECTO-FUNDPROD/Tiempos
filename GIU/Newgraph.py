@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter import messagebox as mb
 from tkinter import ttk
 from functools import partial
+from PIL import ImageTk, Image
 import config
 sys.path.insert(0, "App\View.py")
 import App.View as vw
@@ -19,7 +20,11 @@ def addPredecesores():
         vw.agregarPredecesor(tarea,pre)
 
 def dibujar():
-    vw.dibujarGrafo()
+    img = Image.open(vw.dibujarGrafo())
+    imgTk=ImageTk.PhotoImage(img)
+    global Dibujo
+    Dibujo["image"]=imgTk
+    
 
 
 def nuevoProceso(nombre,descripcion, frecuencia):
@@ -59,9 +64,11 @@ def segundaVentana():
 
     titulo2= Label(root,text="Dibujar Grafo",foreground="black", background="white", font=("Times", 18) )
     titulo2.pack(side=TOP, pady=10)
-
-    Dibujo= Label(root,text="AquiDibujamos",foreground="black", background="white",font=("Times", 18), width=60, height=13,borderwidth="2", relief="solid")
-    Dibujo.pack(side=TOP, pady=6)
+    global Dibujo
+    img = Image.open("CardioGrama.png")
+    imgTk=ImageTk.PhotoImage(img)
+    Dibujo= Label(root ,image=imgTk)
+    Dibujo.pack(side=TOP, pady=6,expand="yes")
 
     Bnp=Button(root,text="Añadir Proceso",command=ingresar_proceso, font=("Times", 13),height=1)
     Bnp.place(x=155,y=420)

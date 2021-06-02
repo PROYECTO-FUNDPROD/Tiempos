@@ -6,6 +6,8 @@ Created on Thu Apr 22 15:04:13 2021
 """
 
 import config
+
+
 from App.Model import proceso
 #from Model import proceso as proceso
 import networkx as nx
@@ -36,7 +38,7 @@ def getObjectbyName(name):
     return objeto
 
 def dibujarGrafo():
-    G = nx.Graph() # crear un grafo
+    G = nx.DiGraph() # crear un grafo
     for cada_objeto in list_procesos:
         G.add_node(cada_objeto.nombre)
  
@@ -44,5 +46,9 @@ def dibujarGrafo():
         for predecesor in cada_objeto.predecesores:
             G.add_edge(predecesor.nombre,cada_objeto.nombre)
     A = nx.nx_agraph.to_agraph(G)
-    A.layout('dot')
-    A.draw('salida.png')
+    A.layout()
+    ruta="Salida.png"
+    A.draw(ruta)
+    return ruta
+    
+    #graphviz.Source(A.to_string()) 
