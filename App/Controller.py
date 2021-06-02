@@ -23,10 +23,18 @@ def getTareasNombres():
 
 def addPredecesor(tarea,predecesor):
     tarea.add_predecesor(predecesor)
+
 def getObjectbyName(name):
     objeto=None
     for cada_objeto in list_procesos:
         if cada_objeto.nombre== name:
             objeto=cada_objeto
     return objeto
+
+def getSucesores(object):
+    lista_Sucesores=[]
+    for cada_objeto in list_procesos:
+        if object in cada_objeto.predecesores:
+            lista_Sucesores.append(cada_objeto.nombre)
+    return lista_Sucesores
 
