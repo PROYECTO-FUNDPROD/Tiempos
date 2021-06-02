@@ -10,10 +10,17 @@ import App.View as vw
 
 def imprimir():
     print("botton")
+
+
+def addPredecesores():
+    print("botton")
     for i in range (0, len(lista)):
-        pre=vw.objectByName(lista[i].get())
-        print(lista[i].get())
+        pre=lista[i].get()
         vw.agregarPredecesor(tarea,pre)
+
+def dibujar():
+    vw.dibujarGrafo()
+
 
 def nuevoProceso(nombre,descripcion, frecuencia):
     if nombre=="" or descripcion=='' or frecuencia=='':
@@ -68,7 +75,7 @@ def segundaVentana():
     Bbt=Button(root,text="Borrar Todo",command=imprimir, font=("Times", 13),height=1)
     Bbt.place(x=780,y=420)
 
-    Bdib=Button(root,text="Dibujar",command=imprimir, font=("Times", 13), height=1)
+    Bdib=Button(root,text="Dibujar",command=dibujar, font=("Times", 13), height=1)
     Bdib.place(x=879,y=420)
 
     Bcalc=Button(root,text="Siguiente",command=imprimir, font=("Times", 16), fg='red', height=2, width=16)
@@ -138,7 +145,7 @@ def ingresar_proceso2(tituloVentana, mensajeVentana, tipo, listanodos):
     tituloV.pack(pady=30)
     mensajeV= Label(root,text=mensajeVentana,foreground="black", background="white", font=("Times", 12), justify="left" )
     mensajeV.place(x=15,y=120)
-    Bacep=Button(root,text="Aceptar",command= imprimir, font=("Times", 13), height=1, )
+    Bacep=Button(root,text="Aceptar",command= addPredecesores, font=("Times", 13), height=1, )
     Bacep.place(x=320,y=340)
 
     
