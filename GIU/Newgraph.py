@@ -31,8 +31,9 @@ def cancelar(r):
     r.destroy()
 
 
-def openWindow(tituloVentana, mensajeVentana,tipo, tareas):
+def openWindow(tituloVentana, mensajeVentana,tipo):
     #r.destroy()
+    tareas= vw.getTareasNombres()
     varios(tituloVentana, mensajeVentana,tipo, tareas)
 
 def segundaVentana():
@@ -141,8 +142,7 @@ def ingresar_proceso2(tituloVentana, mensajeVentana, tipo, listanodos):
     predecesor= ttk.Combobox(root,values=lista,width= 15)
     predecesor.bind("<<ComboboxSelected>>",partial(llenarScroll,predecesor,listanodos,root))
     predecesor.place(x=140,y=85)
-    
-    
+
 contador=0
 def llenarScroll(predecesorCmb,listanodos, root, a):
     predecesor=predecesorCmb.get()
@@ -177,8 +177,7 @@ def llenarScroll(predecesorCmb,listanodos, root, a):
             llenar.config(width=10)
             llenar.pack(side= "top")
             n += 1
-        
-        
+          
         
 def deletef(frame):
     frame.pack_forget()
