@@ -20,3 +20,6 @@ def getTareasNombres():
     for cada_objeto in list_procesos:
         list_nombres.append(cada_objeto.nombre)
     return list_nombres
+
+def addPredecesor(tarea,predecesor):
+    tarea.add_predecesor(predecesor)

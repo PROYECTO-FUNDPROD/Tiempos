@@ -17,7 +17,8 @@ def nueva_tarea(nombre,descripcion, frecuencia):
 def getTareasNombres():
     tareas=cont.getTareasNombres()
     return tareas
-
+def agregarPredecesor(tarea,predecesor):
+    cont.addPredecesor(tarea,predecesor)
 print(nueva_tarea("A","AUTO","2").nombre,nueva_tarea("B","AUTO","2").nombre,nueva_tarea("C","AUTO","2").nombre )
 print(getTareasNombres())
 
