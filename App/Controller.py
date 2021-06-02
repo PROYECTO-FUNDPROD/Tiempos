@@ -3,10 +3,17 @@
 Created on Thu Apr 22 15:04:13 2021
 
 @author: valen
-""""""
+"""
+
 import config
-from App.Model import proceso"""
-from Model import proceso as proceso
+from App.Model import proceso
+import networkx as nx
+#import graphviz
+
+#from Model import proceso as proceso
+
+
+
 
 list_procesos=[]
 
@@ -14,6 +21,9 @@ def nueva_tarea(nombre, descripcion, frecuencia):
     objeto = proceso(nombre, descripcion, frecuencia)
     list_procesos.append(objeto)
     return objeto
+
+def eliminarProceso(object):
+    list_procesos.remove(object)
 
 def getTareasNombres():
     list_nombres=[]
@@ -23,6 +33,9 @@ def getTareasNombres():
 
 def addPredecesor(tarea,predecesor):
     tarea.add_predecesor(predecesor)
+
+def eliminarPredecesor(tarea, predecesor):
+    tarea.delete_predecesor(predecesor)
 
 def getObjectbyName(name):
     objeto=None
@@ -38,3 +51,15 @@ def getSucesores(object):
             lista_Sucesores.append(cada_objeto.nombre)
     return lista_Sucesores
 
+
+def dibujarGrafo():
+    G = nx.Graph() # crear un grafo
+    for cada_objeto in list_procesos:
+        G.add_node(cada_objeto.nombre)
+ 
+    for cada_objeto in list_procesos:
+        for predecesor in cada_objeto.predecesores:
+            G.add_edge(predecesor.nombre,cada_objeto.nombre)
+    A = nx.nx_agraph.to_agraph(G)
+    A.layout('dot')
+    A.draw('salida.png')
