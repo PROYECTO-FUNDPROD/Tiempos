@@ -11,7 +11,9 @@ import App.View as vw
 def imprimir():
     print("botton")
     for i in range (0, len(lista)):
+        pre=vw.objectByName(lista[i].get())
         print(lista[i].get())
+        vw.agregarPredecesor(tarea,pre)
 
 def nuevoProceso(nombre,descripcion, frecuencia):
     if nombre=="" or descripcion=='' or frecuencia=='':
@@ -20,6 +22,7 @@ def nuevoProceso(nombre,descripcion, frecuencia):
         icono="error"
         mb.okMessageBox(titulo,mensaje,icono)
     else:
+        global tarea
         tarea= vw.nueva_tarea(nombre,descripcion,frecuencia)
         tareas= vw.getTareasNombres()
         print(tareas)
@@ -149,8 +152,9 @@ def llenarScroll(predecesorCmb,listanodos, root, a):
     global lista
     lista=[]
     if predecesor!="":
+        
         frameTwo = Frame(root,bg="white")
-        frameTwo.tkraise()
+        
         canvas=Canvas(frameTwo,bg="white",width=350,height=200)
         canvas.pack(side="left")
 
@@ -162,7 +166,8 @@ def llenarScroll(predecesorCmb,listanodos, root, a):
         listFrame=Frame(canvas,background="white")
         canvas.create_window((0,0),window=listFrame, anchor="center")
     
-    #scrollb.grid_forget()    
+    #scrollb.grid_forget()
+        frameTwo.tkraise()    
         frameTwo.pack(side="top",pady=85)
         n = 1
         num_piezas=0
