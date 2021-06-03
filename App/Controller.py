@@ -18,6 +18,7 @@ import networkx as nx
 
 
 list_procesos=[]
+tiempos={}
 
 def nueva_tarea(nombre, descripcion, frecuencia):
     objeto = proceso(nombre, descripcion, frecuencia)
@@ -44,7 +45,7 @@ def eliminarTodosPredecesores(object):
 
 def BorrarTodo():
     del list_procesos[:]
-    
+
 def getObjectbyName(name):
     objeto=None
     for cada_objeto in list_procesos:
@@ -58,7 +59,6 @@ def getSucesores(object):
         if object in cada_objeto.predecesores:
             lista_Sucesores.append(cada_objeto.nombre)
     return lista_Sucesores
-
 
 def dibujarGrafo():
     G = nx.DiGraph() # crear un grafo
@@ -75,3 +75,18 @@ def dibujarGrafo():
     return ruta
     
     #graphviz.Source(A.to_string()) 
+def agregarTiempo(tarea,operario,tiempo):
+    if tarea in tiempos:
+        if operario in tiempos[tarea]:
+            veces= tiempos[tarea][operario]["cant"]
+            suma= tiempos[tarea][operario]["Promedio"]*veces
+            promedio= (suma+tiempo)/(veces+1)
+            tiempos[tarea][operario]["Promedio"]=promedio
+            tiempos[tarea][operario]["cant"]+=1
+        else:
+            tiempos[tarea][operario]={"Promedio":tiempo, "cant":1}
+
+    else:
+        tiempos[tarea]={}
+        tiempos[tarea][operario]={"Promedio":tiempo, "cant":1}
+        

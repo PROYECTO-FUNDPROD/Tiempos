@@ -49,6 +49,10 @@ def BorrarTodo():
     print(getTareasNombres())
 def dibujarGrafo():
     return cont.dibujarGrafo()
+
+def agregarTiempo(tarea,operario,tiempo):
+    tarea=getObjectbyName(tarea)
+    cont.agregarTiempo(tarea,operario,tiempo)
 """
 print(nueva_tarea("Prueba test tarea","AUTO","2").nombre,nueva_tarea("B","AUTO","2").nombre,nueva_tarea("C","AUTO","2").nombre )
 agregarPredecesor(getObjectbyName("B"),"Prueba test tarea")

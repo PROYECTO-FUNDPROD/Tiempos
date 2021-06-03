@@ -189,7 +189,10 @@ class hombre:
         self.holgura= holgura
 
 
+tiempos={
 
+    
+}
 
 
 
