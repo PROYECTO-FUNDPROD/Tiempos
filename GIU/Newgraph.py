@@ -64,16 +64,17 @@ def mostrarTareasSinPrecedesores(predecesorCmb,root,a):
         llenarLabel(mensajeVentana,root)
         global dic_ajuste_predecesores
         dic_ajuste_predecesores={}
-        
 
 def cancelar(r):
     r.destroy()
-
 
 def openWindow(tituloVentana, mensajeVentana,tipo):
     #r.destroy()
     tareas= vw.getTareasNombres()
     Ventana_Eliminar_Proceso(tituloVentana, mensajeVentana,tipo, tareas)
+def openWindowMod(tituloVentana, mensajeVentana,tipo):
+    tareas= vw.getTareasNombres()
+    Ventana_Modificar_Proceso(tituloVentana, mensajeVentana, tipo, tareas)
 
 def segundaVentana():
     root= Tk()
@@ -98,7 +99,7 @@ def segundaVentana():
     Bep=Button(root,text="Eliminar Proceso",command= lambda: openWindow("Eliminar Proceso", "A continuación deberá modificar los procesos que\nquedarán sin antecesor","Proceso: "), font=("Times", 13), height=1)
     Bep.place(x=275,y=420)
 
-    Bbt=Button(root,text="Modificar Proceso",command=lambda: openWindow("Modificar Proceso", "A continuación podrá modificar los predecesores del proceso deseado","Proceso: "), font=("Times", 13),height=1)
+    Bbt=Button(root,text="Modificar Proceso",command=lambda: openWindowMod("Modificar Proceso", "A continuación podrá modificar los predecesores del proceso deseado","Proceso: "), font=("Times", 13),height=1)
     Bbt.place(x=410,y=420)
 
     Bbt=Button(root,text="Borrar Todo",command=imprimir, font=("Times", 13),height=1)
@@ -181,7 +182,6 @@ def ingresar_proceso2(tituloVentana, mensajeVentana, tipo, listanodos):
     predecesor= ttk.Combobox(root,values=lista,width= 15,state="readonly")
     predecesor.bind("<<ComboboxSelected>>",partial(llenarScroll,predecesor,listanodos,root))
     predecesor.place(x=140,y=85)
-
 contador=0
 def llenarScroll(predecesorCmb,listanodos, root, a):
     predecesor=predecesorCmb.get()
@@ -217,13 +217,11 @@ def llenarScroll(predecesorCmb,listanodos, root, a):
             lista.append(llenar)
             llenar.config(width=10)
             llenar.pack(side= "top")
-            n += 1
-          
+            n += 1    
         
 def deletef(frame):
     frame.pack_forget()
     frame.destroy()
-
 
 def Ventana_Eliminar_Proceso(tituloVentana, mensajeVentana, tipo, listanodos):
     root= Tk()
@@ -248,7 +246,6 @@ def Ventana_Eliminar_Proceso(tituloVentana, mensajeVentana, tipo, listanodos):
     predecesor= ttk.Combobox(root,values=listanodos,width= 15,state="readonly")
     predecesor.bind("<<ComboboxSelected>>",partial(mostrarTareasSinPrecedesores,predecesor,root))
     predecesor.place(x=140,y=85)
-
 def llenarScrollEliminar(predecesorCmb,lista_sucesores, listanodos, root, a):
     predecesor=predecesorCmb.get()
     global dic_ajuste_predecesores
@@ -290,6 +287,35 @@ def llenarScrollEliminar(predecesorCmb,lista_sucesores, listanodos, root, a):
 def llenarLabel(mensajeVentana,root):
     mensajeV= Label(root,text=mensajeVentana,foreground="black", background="white", font=("Times", 12), justify="left",borderwidth="1", relief="solid", width=42, height=6 )
     mensajeV.place(x=10, y=185)         
+
+def Ventana_Modificar_Proceso(tituloVentana, mensajeVentana, tipo, listanodos):
+    root= Tk()
+    root.title("Estudio de Tiempos")
+    root.resizable(0,0)
+    root.geometry("400x400")
+    root.config(bg="white")
+
+    labelP=Label(root,text=tipo,foreground="black", background="white", font=("Times", 11))
+    labelP.place(x=15,y=65)
+    labelC=Label(root,text="Cantidad: ",foreground="black", background="white", font=("Times", 11))
+    labelC.place(x=15,y=95)
+    titulo= Label(root,text="Estudio de Tiempos",foreground="black", background="white", font=("Times", 12, "italic") )
+    titulo.place(x=265,y=3)
+    tituloV= Label(root,text=tituloVentana,foreground="black", background="white", font=("Times", 15, "bold") )
+    tituloV.pack(pady=30)
+    mensajeV= Label(root,text=mensajeVentana,foreground="black", background="white", font=("Times", 12), justify="left" )
+    mensajeV.place(x=15,y=120)
+    Bacep=Button(root,text="Aceptar",command= lambda:ajustarPredecesores(root), font=("Times", 13), height=1, )
+    Bacep.place(x=252,y=340)
+    Bacep=Button(root,text="Cancelar",command= lambda: cancelar(root), font=("Times", 13), height=1, )
+    Bacep.place(x=320,y=340)
+
+    proceso= ttk.Combobox(root,values=listanodos,width= 15,state="readonly")
+    proceso.place(x=140,y=65)
+    cantidad= ttk.Combobox(root,values=listanodos,width= 15,state="readonly")
+    cantidad.bind("<<ComboboxSelected>>",partial(mostrarTareasSinPrecedesores,cantidad,root))
+    cantidad.place(x=140,y=95)
+
 #varios("Eliminar proceso", "A continuación debera modificar los procesos que\nquedarán sin antecesor","Procesos:")
 
 
