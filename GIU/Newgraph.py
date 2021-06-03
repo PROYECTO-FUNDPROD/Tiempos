@@ -32,7 +32,7 @@ def imprimir1():
     print("botton")
 
 def dibujar():
-    imgTk=Imagen=Photo(file=vw.dibujarGrafo())
+    imgTk=PhotoImage(file=vw.dibujarGrafo())
     
     global Dibujo
     Dibujo["image"]=imgTk
@@ -95,7 +95,7 @@ def segundaVentana():
     titulo2.pack(side=TOP, pady=10)
     global Dibujo
     
-    imgTk=Imagen=Photo(file="GIU/CardioGrama.png")
+    imgTk=PhotoImage(file="CardioGrama.png")
     Dibujo= Label(root ,image=imgTk)
     Dibujo.place(x=100,y=100)
 
