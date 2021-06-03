@@ -39,6 +39,12 @@ def addPredecesor(tarea,predecesor):
 def eliminarPredecesor(tarea, predecesor):
     tarea.delete_predecesor(predecesor)
 
+def eliminarTodosPredecesores(object):
+    del object.predecesores[:]
+
+def BorrarTodo():
+    del list_procesos[:]
+    
 def getObjectbyName(name):
     objeto=None
     for cada_objeto in list_procesos:
