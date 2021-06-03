@@ -192,8 +192,8 @@ def resultados2(dic,r):
     escribir_linea()
     guardarlineas("----------------------------------------------------\n")
 
-    subtitulo4= Label(root,text="Tiempo estándar de la empresa:",foreground="black", background="white", font=("Times", 12, 'bold'), justify="left")
-    subtitulo4.place(x=33,y=100)
+    #subtitulo4= Label(root,text="Tiempo estándar de la empresa:",foreground="black", background="white", font=("Times", 12, 'bold'), justify="left")
+    #subtitulo4.place(x=33,y=100)
 
     Bvol=Button(root,text="Volver a resultados por operario",command= lambda: openResultados(root), font=("Times", 13), height=1, )
     Bvol.place(x=10,y=dim-50)
