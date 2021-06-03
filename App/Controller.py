@@ -89,4 +89,22 @@ def agregarTiempo(tarea,operario,tiempo):
     else:
         tiempos[tarea]={}
         tiempos[tarea][operario]={"Promedio":tiempo, "cant":1}
+def encontrarParalelos():
+    comun=[]
+    paralelos=[]
+    for object in list_procesos:
+        for cada_objeto in list_procesos:
+            if object in cada_objeto.predecesores:
+                comun.append(cada_objeto)
+        if len(comun)>1:
+            sucesores=[]
+            for paralelo in comun:
+                list=[]
+                list.append(paralelo)
+                paralelos.append(list)
+                sucesores.append(getSucesores(paralelo))
+            for paralelo2 in comun:
+                none=""
+
+
         
