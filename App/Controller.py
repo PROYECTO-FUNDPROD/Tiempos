@@ -5,6 +5,7 @@ Created on Thu Apr 22 15:04:13 2021
 @author: valen
 """
 
+from os import name
 import config
 
 
@@ -19,6 +20,7 @@ import networkx as nx
 
 
 list_procesos=[]
+list_operarios=[]
 tiempos={}
 
 def nueva_tarea(nombre, descripcion, frecuencia):
@@ -74,7 +76,24 @@ def dibujarGrafo():
     ruta="Salida.png"
     A.draw(ruta)
     return ruta
+
+def nuevoOperario(nombre):
+    objeto = operario(nombre)
+    list_operarios.append(objeto)
+    return objeto
     
+def validarOperario(name):
+    operario=getObjectOperariobyName(name)
+    if operario==None:
+        nuevoOperario(name)
+
+def getObjectOperariobyName(name):
+    objeto=None
+    for cada_objeto in list_operarios:
+        if cada_objeto.nombre== name:
+            objeto=cada_objeto
+    return objeto   
+
     #graphviz.Source(A.to_string()) 
 def agregarTiempo(tarea,operario,tiempo):
     if tarea in tiempos:
@@ -90,6 +109,41 @@ def agregarTiempo(tarea,operario,tiempo):
     else:
         tiempos[tarea]={}
         tiempos[tarea][operario]={"Promedio":tiempo, "cant":1}
+
+
+
+def guardarCondiciones(trabajo_pie1, postural, peso_levantador,iluminacione, humedadi, concentracione, ruidos, tensione, monotoniai,tedios):
+    global trabajo_pie
+    trabajo_pie=trabajo_pie1
+
+    global postura
+    postura=postural
+
+    global peso_levantado
+    peso_levantado= peso_levantador
+    
+    global iluminacion
+    iluminacion= iluminacione
+    
+    global humedad
+    humedad=humedadi
+    
+    global concentracion
+    concentracion=concentracione
+
+    global ruido
+    ruido=ruidos
+
+    global tension
+    tension=tensione
+
+    global monotonia
+    monotonia=monotoniai
+
+    global tedio
+    tedio=tedios
+
+
 def encontrarParalelos():
     comun=[]
     paralelos=[]
@@ -110,17 +164,25 @@ def encontrarParalelos():
 
 
 def agregarFNivelacion(tarea,operario,Fnivelacion):
-    tiempos[tarea][operario]["Fnivelacion"]=Fnivelacion     
+    tiempos[tarea][operario]["Fnivelacion"]=int(Fnivelacion)  
 
-def asignarHolgura(operario,trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio):
+def agregarSexo(sexo,object):
+    object.agregarSexo(sexo)
+
+def definirHolguras():
+    for cada_operario in list_operarios:
+        asignarHolgura(cada_operario)
+    print(list_operarios[0].holgura)
+
+def asignarHolgura(operario):
     if operario.sexo=="Mujer":
-        Holgura=CalcularHolguraMujer(trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio)
+        Holgura=CalcularHolguraMujer()
         
     else:
-        Holgura=CalcularHolguraHombre(trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio)
+        Holgura=CalcularHolguraHombre()
     operario.asigHolgura(Holgura)
 
-def CalcularHolguraHombre(trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio):
+def CalcularHolguraHombre():
     holgura= 5+4
     if trabajo_pie == "Sí":
         holgura+=2
@@ -202,7 +264,7 @@ def CalcularHolguraHombre(trabajo_pie, postura, peso_levantado,iluminacion, hume
     elif tedio=='Muy aburrido':
         holgura+=5
     return holgura
-def CalcularHolguraMujer(trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio):
+def CalcularHolguraMujer():
     holgura= 7+4
     if trabajo_pie == "Sí":
         holgura+=4
@@ -281,3 +343,22 @@ def CalcularHolguraMujer(trabajo_pie, postura, peso_levantado,iluminacion, humed
     elif tedio=='Muy aburrido':
         holgura+=2
     return holgura
+
+def calcularTB_TE_Promedios():
+    for cada_tarea in tiempos:
+        sum_general=0
+        cant=0
+        for cada_operario in tiempos[cada_tarea]:
+            print(tiempos[cada_tarea][cada_operario])
+            basico = tiempos[cada_tarea][cada_operario]["Promedio"]*tiempos[cada_tarea][cada_operario]["Fnivelacion"]/100
+            estandar = basico*(1 + (cada_operario.holgura/100))
+            tiempos[cada_tarea][cada_operario]["Basico"]=basico
+            tiempos[cada_tarea][cada_operario]["Estandar"]=estandar
+            sum_general+=estandar
+            cant+=1
+        prom=sum_general/cant
+        tiempos[cada_tarea]["Promedio"]=prom
+    
+    return tiempos
+
+

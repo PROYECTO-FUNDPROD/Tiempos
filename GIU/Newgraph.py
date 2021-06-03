@@ -7,6 +7,7 @@ from functools import partial
 import tkinter as tk
 import config
 import App.View as vw
+import cronometro as cron
 
 def imprimir():
     print("botton")
@@ -49,8 +50,6 @@ def dibujar():
     #Dibujo.pack( )
     Dibujo["image"]=imagen
     Dibujo.image=imagen
-    
-
 
 def nuevoProceso(nombre,descripcion, frecuencia,r):
     if nombre=="" or descripcion=='' or frecuencia=='':
@@ -103,6 +102,11 @@ def openWindowMod(tituloVentana, mensajeVentana,tipo):
 def BorrarTodo():
     vw.BorrarTodo()
 
+def continuar(r):
+    r.destroy()
+    tareas= vw.getTareasNombres()
+    cron.cronometro(tareas)
+
 def segundaVentana():
     root= Tk()
 
@@ -138,7 +142,7 @@ def segundaVentana():
     Bdib=Button(root,text="Dibujar",command=dibujar, font=("Times", 13), height=1)
     Bdib.place(x=879,y=420)
 
-    Bcalc=Button(root,text="Siguiente",command=imprimir, font=("Times", 16), fg='red', height=2, width=16)
+    Bcalc=Button(root,text="Siguiente",command= lambda: continuar(root), font=("Times", 16), fg='red', height=2, width=16)
     Bcalc.pack(side=BOTTOM, pady=50)
 
     #mb.showinfo("Información", "Este programa fue desarrollado para el aprendizaje de Python y tkinter.")

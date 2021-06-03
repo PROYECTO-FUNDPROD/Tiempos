@@ -20,7 +20,8 @@ class proceso:
         self.predecesores.remove(proceso)
     
 class operario:
-    def __init__(self) -> None:
+    def __init__(self,nombre) -> None:
+        self.nombre=nombre
         self.sexo=None
         self.holgura=None
 

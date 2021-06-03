@@ -3,9 +3,11 @@ from tkinter import *
 from functools import partial
 from tkinter import ttk
 import Msgbox as msgs
+from tkinter.simpledialog import askinteger, askstring
 import config
 import App.View as vw
-from tkinter.simpledialog import askinteger, askstring
+import Condiciones as cond
+
 proceso=0
 contador=0
 user=1
@@ -57,8 +59,8 @@ def cronometro(tasks):
     titulo3= Label(root,text="Tarea {1} Operario {0}:".format(user,tareasNombres[tarea-1]),foreground="black", background="white", font=("Times", 12) )
     titulo3.place(x=35,y=70)
     
-    tiempo = Entry(root, fg='black', width=20, font=("Times", 18) )    
-    tiempo.pack(pady=4)
+    tiempo = Entry(root, fg='black', width=20, font=("Times", 20) )    
+    tiempo.pack(pady=5)
     tiempo.insert(0, 0)
     
 # si queremos que se autoejecuta al iniciar el programa hay que desomentar
@@ -68,22 +70,22 @@ def cronometro(tasks):
 # Generamos un frame para poner los botones de iniciar y parar
 
     btnIniciar=Button(root, fg='black',bg="white", text='Iniciar', command=iniciar,font=("Times", 12) )
-    btnIniciar.place(x=35,y=145)
+    btnIniciar.place(x=55,y=145)
 
     btnGuardar=Button(root, fg='black',bg="white", text='Guardar',command= guardarGIU,font=("Times", 12) )
-    btnGuardar.place(x=135,y=145)
+    btnGuardar.place(x=107,y=145)
     Sexolabel=Label(root,text="Sexo:",foreground="black", background="white", font=("Times", 11),)
     Sexolabel.place(x=35,y=245)
 
-    Sexo= ttk.Combobox(root,values=['Hombre','Mujer'],width= 18)
+    Sexo= ttk.Combobox(root,values=['Hombre','Mujer'],width= 18,state="readonly")
     Sexo.place(x=215,y=245)
     global infolabel
     infolabel=Label(root,text="",foreground="black", background="white", font=("Times", 11),)
     infolabel.place(x=80,y=180)
 
     
-    Bacep=Button(root,text="Continuar",command=partial(Continuar,Sexo), font=("Times", 13), height=1, )
-    Bacep.place(x=260,y=280)
+    Bacep=Button(root,text="Continuar",command=partial(Continuar,Sexo,root), font=("Times", 13), height=1, )
+    Bacep.place(x=280,y=295)
     root.mainloop()
 
 def guardarGIU():
@@ -120,14 +122,10 @@ def habilitarBotones():
 
 
 
-
-
-
-
-
 def cambioTarea():
     global tarea
-    askinteger('Factor Nivelación', "Cual es el factor de nivelacion del operario {0} en la tarea {1}?".format(user,tareasNombres[tarea-1]),minvalue=0.0,maxvalue=150,initialvalue=100)
+    ans=askinteger('Factor Nivelación', "¿Cuál es el factor de nivelacion del Operario {0} en la Tarea {1}?".format(user,tareasNombres[tarea-1]),minvalue=0.0,maxvalue=150,initialvalue=100)
+    vw.agregarFNivelacion(tareasNombres[tarea-1],user,ans)
     tarea+=1
     try:
         titulo3.config(text="Tarea {1} Operario {0}:".format(user,tareasNombres[tarea-1]))
@@ -140,9 +138,11 @@ def cambioTarea():
     
 
 def guardarTiempo():
-    vw.agregarTiempo(tareasNombres[tarea-1],user,tiempo.get())
+    vw.agregarTiempo(tareasNombres[tarea-1],user,float(tiempo.get()))
     print("La tarea es {0} del usuario {1} con tiempo {2}".format(tareasNombres[tarea-1],user,tiempo.get()))
 
+def agregarSexo(sexo):
+    vw.agregarSexo(sexo,user)
 
 def otroTiempo():
     global user
@@ -159,11 +159,13 @@ def reiniciarCronometro():
     tiempo.delete(0,"end")
     tiempo.insert(0, contador)
 
-def siguienteVentana():
+def siguienteVentana(r):
+    r.destroy()
+    cond.condiciones_laborales()
     print("PASO A SIGUIENTE VENTANA")
 
 
-def Continuar(Sexo):
+def Continuar(Sexo,root):
     Sex=Sexo.get()
     if Sex=="" :
         titulo="Información Incompleta"
@@ -180,8 +182,9 @@ def Continuar(Sexo):
             titulo="Información Incompleta"
             mensaje= "Registró los tiempos para {0} Tareas del Operario {1} ¿Desea tomar tiempos para otro operario?".format(tarea-1,user)
             icono="info"
-            msgs.doMessageBox(titulo,mensaje,icono,CambioOperario,siguienteVentana)
+            agregarSexo(Sex)
+            msgs.doMessageBox(titulo,mensaje,icono,CambioOperario,lambda: siguienteVentana(root))
 
 
-cronometro(2)
+#cronometro(2)
 

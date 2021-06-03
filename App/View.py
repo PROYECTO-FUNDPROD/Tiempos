@@ -50,13 +50,43 @@ def BorrarTodo():
 def dibujarGrafo():
     return cont.dibujarGrafo()
 
+def nuevoOperario(name):
+    cont.nuevoOperario(name)
+
+def validarOperario(name):
+    cont.validarOperario(name)
+
+def getObjectOperariobyName(name):
+    object= cont.getObjectOperariobyName(name)
+    return object
+
 def agregarTiempo(tarea,operario,tiempo):
     tarea=getObjectbyName(tarea)
+    validarOperario(operario)
+    operario=getObjectOperariobyName(operario)
     cont.agregarTiempo(tarea,operario,tiempo)
 
 def agregarFNivelacion(tarea,operario, Fnivelacion):
     tarea=getObjectbyName(tarea)
+    operario=getObjectOperariobyName(operario)
     cont.agregarFNivelacion(tarea,operario,Fnivelacion)
+
+def guardarCondiciones(trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio):
+    cont.guardarCondiciones(trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio)
+
+def agregarSexo(sexo,user):
+    object=getObjectOperariobyName(user)
+    cont.agregarSexo(sexo,object)
+
+def definirHolguras():
+    cont.definirHolguras()
+
+def calcularTB_TE_Promedios():
+    dic= cont.calcularTB_TE_Promedios()
+    return dic
+
+
+
 """
 print(nueva_tarea("Prueba test tarea","AUTO","2").nombre,nueva_tarea("B","AUTO","2").nombre,nueva_tarea("C","AUTO","2").nombre )
 agregarPredecesor(getObjectbyName("B"),"Prueba test tarea")
