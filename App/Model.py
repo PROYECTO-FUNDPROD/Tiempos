@@ -19,6 +19,17 @@ class proceso:
     def delete_predecesor(self,proceso):
         self.predecesores.remove(proceso)
     
+class operario:
+    def __init__(self) -> None:
+        self.sexo=None
+        self.holgura=None
+
+    def agregarSexo(self,Sexo):
+        self.sexo=Sexo
+
+    def asigHolgura(self,Holgura):
+        self.holgura=Holgura
+
 
 class mujer:
     def __init__(self, trabajo_pie, postura, peso_levantado,iluminacion, humedad, concentracion, ruido, tension, monotonia,tedio):
@@ -189,10 +200,7 @@ class hombre:
         self.holgura= holgura
 
 
-tiempos={
 
-    
-}
 
 
 

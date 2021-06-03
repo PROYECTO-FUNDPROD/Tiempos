@@ -53,6 +53,10 @@ def dibujarGrafo():
 def agregarTiempo(tarea,operario,tiempo):
     tarea=getObjectbyName(tarea)
     cont.agregarTiempo(tarea,operario,tiempo)
+
+def agregarFNivelacion(tarea,operario, Fnivelacion):
+    tarea=getObjectbyName(tarea)
+    cont.agregarFNivelacion(tarea,operario,Fnivelacion)
 """
 print(nueva_tarea("Prueba test tarea","AUTO","2").nombre,nueva_tarea("B","AUTO","2").nombre,nueva_tarea("C","AUTO","2").nombre )
 agregarPredecesor(getObjectbyName("B"),"Prueba test tarea")
