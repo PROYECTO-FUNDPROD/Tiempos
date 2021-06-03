@@ -7,8 +7,7 @@ Created on Thu Apr 22 15:04:13 2021
 
 from os import name
 import config
-
-
+import shutil as s
 from App.Model import proceso
 from App.Model import operario
 import networkx as nx
@@ -22,7 +21,7 @@ import networkx as nx
 list_procesos=[]
 list_operarios=[]
 tiempos={}
-
+lineas=[]
 def nueva_tarea(nombre, descripcion, frecuencia):
     objeto = proceso(nombre, descripcion, frecuencia)
     list_procesos.append(objeto)
@@ -361,4 +360,30 @@ def calcularTB_TE_Promedios():
     
     return tiempos
 
+def traerTiempos():
+    return tiempos
 
+def abrir_reporte(nombre):
+    global reporte
+    reporte=open(nombre,"w+")
+    reporte.write ("Resultados Estudio de Tiempos\n")
+    reporte.write("----------------------------------------------------\n")
+
+def escribir_reporte (mensaje):
+    reporte.write(mensaje)
+
+def escribir_linea():
+    reporte.write("----------------------------------------------------\n")
+    
+    
+def cerrar_reporte():
+    reporte.close()
+
+def guardarResultados(path):
+    print(lineas)
+    with open(path,"w") as f1:
+        for linea in lineas:
+            f1.write(linea)
+    f1.close()
+def guardarlineas(linea):
+    lineas.append(linea)
