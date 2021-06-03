@@ -6,7 +6,6 @@ from tkinter import ttk
 from functools import partial
 import tkinter as tk
 import config
-sys.path.insert(0, "App\View.py")
 import App.View as vw
 
 def imprimir():
