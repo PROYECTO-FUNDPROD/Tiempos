@@ -56,8 +56,6 @@ print(getObjectbyName("C").predecesores)
 #print(getSucesores("A"))
 dibujarGrafo()
 """
-print()
-print()
 
 
 

@@ -4,7 +4,6 @@ from tkinter import *
 from tkinter import messagebox as mb
 from tkinter import ttk
 from functools import partial
-from PIL import ImageTk, Image
 import config
 sys.path.insert(0, "App\View.py")
 import App.View as vw
@@ -33,8 +32,8 @@ def imprimir1():
     print("botton")
 
 def dibujar():
-    img = Image.open(vw.dibujarGrafo())
-    imgTk=ImageTk.PhotoImage(img)
+    imgTk=Imagen=Photo(file=vw.dibujarGrafo())
+    
     global Dibujo
     Dibujo["image"]=imgTk
     
@@ -94,10 +93,10 @@ def segundaVentana():
     titulo2= Label(root,text="Dibujar Grafo",foreground="black", background="white", font=("Times", 18) )
     titulo2.pack(side=TOP, pady=10)
     global Dibujo
-    img = Image.open("CardioGrama.png")
-    imgTk=ImageTk.PhotoImage(img)
+    
+    imgTk=Imagen=Photo(file="GIU/CardioGrama.png")
     Dibujo= Label(root ,image=imgTk)
-    Dibujo.pack(side=TOP, pady=6,expand="yes")
+    Dibujo.place(x=100,y=100)
 
     Bnp=Button(root,text="Añadir Proceso",command=ingresar_proceso, font=("Times", 13),height=1)
     Bnp.place(x=155,y=420)
