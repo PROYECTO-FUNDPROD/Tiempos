@@ -41,6 +41,10 @@ def eliminarPredecesor(name, predecesor):
     cont.eliminarPredecesor(object, predecesor)
 
 def dibujarGrafo():
+    return cont.dibujarGrafo()
+"""
+print(nueva_tarea("Prueba test tarea","AUTO","2").nombre,nueva_tarea("B","AUTO","2").nombre,nueva_tarea("C","AUTO","2").nombre )
+agregarPredecesor(getObjectbyName("B"),"Prueba test tarea")
     cont.dibujarGrafo()
 
 print(nueva_tarea("A","AUTO","2").nombre,nueva_tarea("B","AUTO","2").nombre,nueva_tarea("C","AUTO","2").nombre )
@@ -49,6 +53,9 @@ agregarPredecesor(getObjectbyName("C"),"B")
 print(getTareasNombres())
 print(getObjectbyName("C").nombre)
 print(getObjectbyName("C").predecesores)
+#print(getSucesores("A"))
+dibujarGrafo()
+"""
 print()
 print()
 
