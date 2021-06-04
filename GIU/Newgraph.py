@@ -44,7 +44,7 @@ def imprimir1():
     print("botton")
 
 def dibujar():
-    imagen=PhotoImage(file="GIU/"+vw.dibujarGrafo())
+    imagen=PhotoImage(file=vw.dibujarGrafo())
     
     #global Dibujo
     #Dibujo.pack( )
@@ -122,7 +122,7 @@ def segundaVentana():
     titulo2.pack(side=TOP, pady=10)
     global Dibujo
     
-    imagen=PhotoImage(file="GIU/Inicio.png")
+    imagen=PhotoImage(file="Inicio.png")
     Dibujo= Label(root,image=imagen,width=800,height=340,bg="white")
     Dibujo.pack( )
     Dibujo.image=imagen

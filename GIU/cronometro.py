@@ -179,7 +179,7 @@ def Continuar(Sexo,root):
             icono="error"
             msgs.okMessageBox(titulo,mensaje,icono)
         else:
-            titulo="Información Incompleta"
+            titulo="Registrar Nuevo Operario"
             mensaje= "Registró los tiempos para {0} Tareas del Operario {1} ¿Desea tomar tiempos para otro operario?".format(tarea-1,user)
             icono="info"
             agregarSexo(Sex)

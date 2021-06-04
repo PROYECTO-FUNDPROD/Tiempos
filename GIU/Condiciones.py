@@ -40,7 +40,7 @@ def Aceptar(A,B,cspin,D,espin,F,G,H,I,J,r):
 def condiciones_laborales():
     root= Tk()
 
-    root.title("Estudio de Tiempos: Ingresar Información de los Operarios")
+    root.title("Ingresar Condiciones Laborales")
     root.resizable(0,0)
     root.geometry("550x530")
     root.config(bg="white")

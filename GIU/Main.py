@@ -11,7 +11,7 @@ def mainwindow():
 
     root.title("Estudio de Tiempos")
     root.resizable(0,0)
-    root.geometry("400x200")
+    root.geometry("300x200")
     root.config(bg="white")
 
     titulo= Label(root,text="Estudio de Tiempos",foreground="black", background="white", font=("Times", 18) )
