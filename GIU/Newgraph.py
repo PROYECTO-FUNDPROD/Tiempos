@@ -44,7 +44,7 @@ def imprimir1():
     print("botton")
 
 def dibujar():
-    imagen=PhotoImage(file=vw.dibujarGrafo())
+    imagen=PhotoImage(file="GIU/"+vw.dibujarGrafo())
     
     #global Dibujo
     #Dibujo.pack( )
@@ -62,6 +62,7 @@ def nuevoProceso(nombre,descripcion, frecuencia,r):
         tarea= vw.nueva_tarea(nombre,descripcion,frecuencia)
         tareas= vw.getTareasNombres()
         print(tareas)
+        tareas.remove(nombre)
         if len(tareas)>1:
             r.destroy()
             ingresar_proceso2("Añadir Predecesores", "A continuación debe ingresar los predecesores del Proceso {0}".format(nombre),"Cantidad de predecesores: ",tareas)
@@ -122,7 +123,7 @@ def segundaVentana():
     titulo2.pack(side=TOP, pady=10)
     global Dibujo
     
-    imagen=PhotoImage(file="Inicio.png")
+    imagen=PhotoImage(file="GIU/Inicio.png")
     Dibujo= Label(root,image=imagen,width=800,height=340,bg="white")
     Dibujo.pack( )
     Dibujo.image=imagen
@@ -193,7 +194,7 @@ def ingresar_proceso():
     Bcan.place(x=290,y=250)
 
 def ingresar_proceso2(tituloVentana, mensajeVentana, tipo, listanodos):
-    lista_cantidad= list(range(0, len(listanodos)))
+    lista_cantidad= list(range(0, len(listanodos)+1))
     root= Tk()
     root.title("Estudio de Tiempos")
     root.resizable(0,0)
@@ -215,10 +216,11 @@ def ingresar_proceso2(tituloVentana, mensajeVentana, tipo, listanodos):
     
     predecesor= ttk.Combobox(root,values=lista_cantidad,width= 15,state="readonly")
     predecesor.bind("<<ComboboxSelected>>",partial(llenarScroll,predecesor,listanodos,root))
-    predecesor.place(x=140,y=85)
+    predecesor.place(x=180,y=85)
 contador=0
 def llenarScroll(predecesorCmb,listanodos, root, a):
     predecesor=predecesorCmb.get()
+    print(listanodos)
     global lista
     lista=[]
     if predecesor!="":
